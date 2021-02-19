@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"lessons/db"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -19,6 +20,8 @@ type Data struct {
 }
 
 func main() {
+
+	db.Connect()
 	r := mux.NewRouter()
 	r.NotFoundHandler = http.HandlerFunc(notfound)
 	r.HandleFunc("/", home)
