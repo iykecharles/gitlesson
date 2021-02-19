@@ -12,6 +12,12 @@ var (
 	templates = template.Must(template.ParseGlob("templates/*"))
 )
 
+// Data is good to go
+type Data struct {
+	Age      int
+	Username string
+}
+
 func main() {
 	r := mux.NewRouter()
 	r.NotFoundHandler = http.HandlerFunc(notfound)
@@ -25,7 +31,11 @@ func main() {
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
-	templates.ExecuteTemplate(w, "home.html", nil)
+	data := Data{
+		Age:      20,
+		Username: "charlesEzema",
+	}
+	templates.ExecuteTemplate(w, "home.html", data)
 }
 
 func contact(w http.ResponseWriter, r *http.Request) {
