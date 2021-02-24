@@ -8,7 +8,7 @@ import (
 )
 
 // Connect would connect to the postgres database
-func Connect() {
+func Connect() *pg.DB{
 	opts := &pg.Options{
 		Addr:     "localhost:5432",
 		User:     "postgres",
@@ -24,12 +24,6 @@ func Connect() {
 	log.Printf("Database connected succesfully")
 	
 	CreateProdItemsTable(db)
-	closeErr := db.Close()
-	if closeErr != nil {
-		log.Printf("Erroe found while closing database")
-		os.Exit(100)
-	}
-	log.Printf("Database has been closed successfully")
-	return
+	return db
 
 }
